@@ -351,13 +351,19 @@ starts from 0 for the first element in sequence. way to accessing elements in py
 negative indexing:
 starts from -1 for the last elements in sequence.
 
-33. sql alchemy: Object Relational Mapper (ORM)
+33. SQL alchemy: Object Relational Mapper (ORM)
 sql alchemy is an orm. it provides a way to interact with database and manage transaction 
 Use case: Using Python objects instead of writing raw SQL queries.
 It also manages connections, transactions, and schema definitions automatically.
 
 34. Sub Query:
 Sub Query is known as the nested query or inner query a query nested with another query.
+SELECT MAX(salary) AS second_highest_salary
+FROM user
+WHERE salary < (
+    SELECT MAX(salary)
+    FROM user
+);
 
 35. Joins
 Combine Records from one or more tables.
@@ -369,3 +375,50 @@ iii)Right Join
 Returns all records from right table and matched records from left table.
 iv)Full join or Full Outer Join
 Returns all the records from match in left or right table, when unmatched records return in null values.
+
+36. views in sql:
+View cannot have index
+It is virtual table based on the result set of and sql statement
+A view is created with the create view statement
+Usecase: Instead of writing a long query mutiple times, you can store in view and select * from view_name;
+
+create VIEW user_sal_view as 
+select 
+u.user_name,
+u.user_id,
+s.ctc,
+from
+user u
+join
+salary s
+on
+u.user_id = s.user_id;
+
+select * from user_sal_view;
+
+37. Second highest salary from user table
+select salary 
+from user
+order by salary desc
+limit 1
+offset 1; --> skip the first row
+
+
+38. To find duplicate value in SQL table:
+select col_name, COUNT(*) as count
+from table_name
+group by col_name
+having count(*) >1;
+
+39. Foreign key is a constraint used to link two tables together
+parent table : contains primary key to which fk refers
+child table: the table contains the foriegn key
+
+40. Monolithic:
+Tightly coupled and run as a single service. All are interconnected service
+Simple to develop and deploy (good for small applications).
+Microservice:
+A collection of small, independent services that communicate with each other over web protocols like rest apis
+Good for large, scalable systems.
+Each service has its own codebase and can be deployed independently.
+Advantage: failure in one service doesn’t crash the whole system
