@@ -1,0 +1,371 @@
+1. Unit Testing?
+It is module level testing. Focus on individual components or function of your code is working or not.
+How it works:
+Use assert statements to check if the actual value equals the expected value.
+Example: assert actual_value == expected_value
+Purpose: 
+1.Ensure each part of code working as expected
+2.Catch bugs early in development stage
+3.Write test case function prefixed with test_function_name and run using pytest command
+Run command: pytest/pytest test_file_name.py/pytest test_file.py::test_function_name
+Framework Used: Pytest framework or Unittest inbuilt library
+
+2. What is conftest.py?
+conftest.py is a special configuration file used in Pytest.
+There is set of function can be written added in fixture, it can be run before every test case when its initialize.
+
+3. Integration Testing?
+It is the combination of mutiple modules working together.
+Integration testing is the process of testing how multiple modules or components work together as a group. 
+It ensures that the interactions between different parts of the system function correctly.
+Framework Used: Pytest framework
+
+4. Generators in python?
+It is normal function. But we using yield keyword instead of return statement.
+Advantange more memeory efficient compared to list
+Because do not store entire sequence of values in memeory all at once. Instead generate value only one at a time.
+Genrate value only needed using next() function in generator
+
+5. Decorator in python?
+Add funtionality to function or class without modifying their original code.
+
+6. Middleware?
+Process of request and response intercepts globally before they reach the route or after leave the route.
+Commonly used in logging, hanlde authentication, security and secure management.
+You can listed middleware in the middleware settings in settings.py
+
+key difference:
+Middleware:
+used in application level
+intercepts and process the http request
+configure in settings.py or app startup
+Decorator:
+used in functional level
+add behaviour to function
+using @decorator_name
+
+import time
+
+def simple_decorator(f):
+	def wrapper(*args, ** kwargs):
+		print(time.time())
+		result = f(*args, **kwargs)
+		print(time.time())
+		return result
+	return wrapper
+	
+
+@simple_decorator
+def func_name(*args):
+	a = sum(args)
+	return a
+
+print(func_name(1,2,3,4))
+
+9. *args, **kwargs in python?
+*args non keyword arguments
+Meaning: Collects positional (non-keyword) arguments into a tuple.
+Use case: When you don’t know how many number of arguments passed to a function 
+that time using args
+def add_numbers(*args):
+    return sum(args)
+
+print(add_numbers(1, 2, 3, 4))  # Output: 10
+
+**kwargs keyword arguments
+Meaning: Collects keyword arguments into a dictionary.
+Use case:When you don’t know how many keyword arguments will be passed.
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="Alice", age=25, city="Chennai")
+
+
+10. Python memory manager?
+Python memeory manager primarily handled by private heap space.
+You create python object like dict or list memeory is allocated from this private heap space.
+Python memory manager handles the allocation and deallocation of memeory for those objects.
+But some cycles of memeory is running in background. The garbage collector identifies these cycles and 
+free the memeory spaces.
+
+11. Multithreading?
+Execution of multi threads concurrently with same time.
+In python GIL executes single threads at a time even on mutiple cpu core.
+As the result multithreading does not perform on cpu bound task due to GIL.
+So where threads spend amount of time waiting in i/o opertion, other threads are scheduled to executed
+
+12. Multiprocessing?
+Multiprocessing means running many processes at the same time, each on its own CPU core.
+Unlike multithreading, it avoids Python’s GIL, so it’s best for CPU-bound tasks like heavy calculations or data processing.
+Real-Time Examples of Multiprocessing:
+Image and Video Processing
+Editing or filtering thousands of images in parallel.
+Rendering video frames across multiple CPU cores to speed up processing.
+
+13. Shallow copy?
+A shallow copy creates a new object that references the same elements as the original list. 
+If you change those elements, the original list will also be affected.
+Use copy.copy() method
+14. Deep copy?
+It is create new object but original list will not be affected.
+Use copy.deepcopy() method
+
+import copy
+Shallow copy:
+original_list = [1,2,[3,4]]
+copied_list = copy.copy(original_list)
+copied_list[2].append(5)
+print(original_list) # [1, 2, [3, 4, 5]]
+print(copied_list) #[1, 2, [3, 4, 5]]
+Deep copy:
+original_list = [1,2,[3,4]]
+copied_list = copy.deepcopy(original_list)
+copied_list[2].append(5) 
+print(original_list) #[1, 2, [3, 4]]
+print(copied_list) #[1, 2, [3, 4, 5]]
+
+15. Synchronus function:
+A synchronous function is a normal function where each operation runs one after another.
+It blocks execution until the current task is finished.
+
+16. Asynchrous function:
+An asynchronous function is defined with the async keyword and executed asynchronously it means dont have wait around each operation. 
+For example, if many operations are running in the background and the first one takes time, 
+the second can run immediately, while the first continues and finishes later.
+
+17. List Comphrension:
+Create a list based on existing iterables.
+my_list = [1,2,3]
+square = [num * num for num in my_list]
+print(square)
+my_list = [1,2,3,4,5,6]
+even_number = [num for num in my_list if num % 2 == 0]
+print(even_number)
+
+18. Lambda:
+It is anonyms function using lambda keyword. Taking any number of arguments only one expression having
+x = lambda a : a + 10
+print(x(5))
+
+19. map() function
+It is used to apply function to every item in iterable and return new map object. You can convert this result to list.
+Use case: 
+More memory efficient than using for loops
+easily combine with lambda
+
+data = [1,2,3,4]
+x = lambda a: a *2
+print(list(map(x,data)))
+
+list1 = [1,2,3]
+list = [4,5,6]
+print(list(map(lambda a,b : a+b, list1, list2)))
+
+20. zip() function?
+zip function takes iterables and aggregates them in tuple and return it
+list1 = [1,2,3]
+list = [4,5,6]
+c = [a+b for a, b in zip(list1, list2)]
+
+21. Sonar lint
+Scope: Works inside your IDE
+Used for Individual developers
+SonarLint is a static code analysis tool.
+It integrates directly into your IDE.
+Its main purpose is to detect and highlight code quality issues and security vulnerabilities while you write code — so you can fix them immediately.
+SonarQube:
+Scope: Runs on a your server (self-hosted).
+Used for Teams/organizations
+
+22. Pass does nothing
+Break is for breaking the loop execution
+Continue is for skipping the value of loop iteration.
+
+23. Code optimization:
+1. Indexing in sql
+Used to improve the speed up the data retreival operation on a database.
+Enchance the query speed make insert , update query will takes longer
+Create INDEX index_name on table_name(col);
+Drop INDEX index_name on table_name(col);
+2. Removing Unwanted Subqueries (Using Joins Instead)
+3. Using Lambda and Map Functions Instead of For Loops (Python)
+
+24. oops(object oriented programming language)
+creating objects that contain both data and behaviour
+it is create modular, reusable and maintainable code.
+
+1. Encapsulation:
+the methods that works on data within a single unit can prevent the accidental modification of data and used for
+security purpose
+1. protect variable: declared before variable name single underscore
+can be accessed with a class and subclass
+2. private variable:  declared before variable name double underscore
+cannot accessed outside of class nor base class
+
+2. Abstraction:
+Hiding complex details and exposing only essential feature of an object
+It serves as  a blueprint for other class
+Abstract class added in base class must be used in dervied class
+
+from abc import ABC , abstractmethod
+
+class Vehicle(ABC):
+    def __init__(self, brand):
+        self.brand = brand
+        
+    @abstractmethod
+    def startengine1(self):
+        pass
+    
+    # @abstractmethod
+    # def startengine2(self):
+    #     pass
+    
+    
+class Car(Vehicle):
+    def startengine1(self):
+        return f"{self.brand} car's engine started"
+    
+car = Car('Exter')
+print(car.startengine1())
+
+ABC used for serves blueprint for other classes
+vehicle = Vehicle() this will raise error because you cannot intitate abstract class
+
+
+3. Polymorphism:
+Different object respond the same method or function call in different ways of approach.
+
+class Vehicle:
+    def __init__(self, brand):
+        self.brand = brand
+
+    def startengine1(self):
+        pass
+    
+class Car(Vehicle):
+    def startengine1(self):
+        return f"{self.brand} car's engine started"
+        
+class Bike(Vehicle):
+    def startengine1(self):
+        return f"{self.brand} bike's engine started"
+    
+vehicles = [Car("Exter"), Bike("Suzuki")]
+for vehicle in vehicles:
+    print(vehicle.startengine1())
+    
+4. Inheritance:
+Inheritance are inherits the properties of base class to dervied class
+
+i) Single inheritance:
+single inheritance are inherits the properties from only one parent class child class.
+
+ii) multiple inheritance:
+inherits from more than one base class. Like parent 1, parent 2 inherits to child class.
+
+iii) multilevel inheritance:
+a class inherits from a parent class and then another class inherits from the dervied class.
+Like grandfather, parent(grandfather), child(parent)
+
+iv) hierarchical inheritance:
+multiple classes inherits from a common parent class.
+Like: Animal, Cat(Animal), Dog(Animal)
+
+25. Constructor:
+It is called special method or magical method for class __init__() method. Used to initialize the new object
+and automatically create instance of class
+
+
+26. super() method
+used to call the parent class from the child class. within child class we need initialize the super method
+access the attributes from the parent class
+
+27. i) instance method:
+it is normal method
+it takes self as first argument
+it works with object
+
+ii) class method
+it takes cls as first argument
+access the class variable
+@classmethod decorator is used here
+this method can be called using class
+
+iii) static method 
+does not take any specific parameter
+cannot access the class variable or instance variable
+@staticmethod decorator is used here 
+this method can be called using class as well
+
+class Employee:
+    
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+    def show_details(self):
+        return f"Employee name {self.name} and age {self.age}"
+    
+    company_name = "HTL"
+    
+    @classmethod
+    def get_company_name(cls):
+        return f"Company name {cls.company_name}."
+        
+    @staticmethod
+    def greeting():
+        return "Welcome"
+        
+
+emp1 = Employee("Gowtham", 30)
+print(Employee.greeting())
+print(Employee.get_company_name())
+print(emp1.show_details())
+
+
+28. Authentication:(who you are)
+process of verifying user indentity to ensure that person valid or not. 
+using username and password. once indentity confirmed,they can access the login page 
+
+29. Authorization: control permission(what you can do)
+what actions authenticate user is allowed to access
+
+30. Git and Github:
+Git -- version control system
+Purpose: Helps developers track changes in their code, collaborate efficiently, and maintain history.
+
+Github --  cloud-based platform
+remote storage for git respositories
+ci/cd integration for automation using via github action runner
+code review and access control
+
+
+31. range function
+generates sequence of numbers. it creates a range object that represents sequence of numbers
+between start vaule and end value
+
+32. postive indexing:
+starts from 0 for the first element in sequence. way to accessing elements in python
+negative indexing:
+starts from -1 for the last elements in sequence.
+
+33. sql alchemy: Object Relational Mapper (ORM)
+sql alchemy is an orm. it provides a way to interact with database and manage transaction 
+Use case: Using Python objects instead of writing raw SQL queries.
+It also manages connections, transactions, and schema definitions automatically.
+
+34. Sub Query:
+Sub Query is known as the nested query or inner query a query nested with another query.
+
+35. Joins
+Combine Records from one or more tables.
+i) Inner Joins
+Return only matched records from both the tables 
+ii) Left joins
+Return all records from left table and matched records from right table.
+iii)Right Join
+Returns all records from right table and matched records from left table.
+iv)Full join or Full Outer Join
+Returns all the records from match in left or right table, when unmatched records return in null values.
