@@ -15,19 +15,41 @@ conftest.py is a special configuration file used in Pytest.
 There is set of function can be written added in fixture, it can be run before every test case when its initialize.
 
 3. Integration Testing?
-It is the combination of mutiple modules working together.
+It is the combination of mutiple modules working together correctly.
 Integration testing is the process of testing how multiple modules or components work together as a group. 
 It ensures that the interactions between different parts of the system function correctly.
 Framework Used: Pytest framework
 
 4. Generators in python?
-It is normal function. But we using yield keyword instead of return statement.
+It looks like a normal function. But we using yield keyword instead of return statement.
 Advantange more memeory efficient compared to list
-Because do not store entire sequence of values in memeory all at once. Instead generate value only one at a time.
-Genrate value only needed using next() function in generator
+Because do not store entire sequence of values in memeory all at once. Instead of generate a value only one at a time.
+Genrates a value using next() function in generator
+
+data = [1, 2, [3], [4, [5, 6]]]
+
+def flatten(nested):
+    for item in nested:
+        if isinstance(item, list):
+            yield from flatten(item)
+        else:
+            yield item
+
+print(list(flatten(data)))  # [1, 2, 3, 4, 5, 6]
 
 5. Decorator in python?
 Add funtionality to function or class without modifying their original code.
+
+Rate Limiting: Limiting the api http request.
+Prevents too many calls in a short time, protecting APIs or servers from overload.
+
+from ratelimiter import RateLimiter
+
+@RateLimiter(max_calls=10, period=1)
+def fetch_data():
+    print("Fetching data...")
+
+This allows 10 calls per second. If exceeded, it delays execution
 
 6. Middleware?
 Process of request and response intercepts globally before they reach the route or after leave the route.
@@ -185,7 +207,7 @@ Continue is for skipping the value of loop iteration.
 23. Code optimization:
 1. Indexing in sql
 Used to improve the speed up the data retreival operation on a database.
-Enchance the query speed make insert , update query will takes longer
+Enchance the query speed make insert, update query will takes longer
 Create INDEX index_name on table_name(col);
 Drop INDEX index_name on table_name(col);
 2. Removing Unwanted Subqueries (Using Joins Instead)
@@ -199,7 +221,7 @@ it is create modular, reusable and maintainable code.
 the methods that works on data within a single unit can prevent the accidental modification of data and used for
 security purpose
 1. protect variable: declared before variable name single underscore
-can be accessed with a class and subclass
+can be accessed within a class and subclass
 2. private variable:  declared before variable name double underscore
 cannot accessed outside of class nor base class
 
@@ -260,7 +282,7 @@ for vehicle in vehicles:
 Inheritance are inherits the properties of base class to dervied class
 
 i) Single inheritance:
-single inheritance are inherits the properties from only one parent class child class.
+single inheritance are inherits the properties from only one parent class to child class.
 
 ii) multiple inheritance:
 inherits from more than one base class. Like parent 1, parent 2 inherits to child class.
@@ -414,7 +436,12 @@ having count(*) >1;
 parent table : contains primary key to which fk refers
 child table: the table contains the foriegn key
 
-40. Monolithic:
+40. Primary key consists of single column
+A composite key is a primary key made up of multiple columns. Mainly used for many many relationship
+one student purchase many course
+one course can purchased by many students
+
+41. Monolithic:
 Tightly coupled and run as a single service. All are interconnected service
 Simple to develop and deploy (good for small applications).
 Microservice:
@@ -422,3 +449,106 @@ A collection of small, independent services that communicate with each other ove
 Good for large, scalable systems.
 Each service has its own codebase and can be deployed independently.
 Advantage: failure in one service doesn’t crash the whole system
+
+42. Steps to Deploy FastAPI on AWS EC2 (Ubuntu)
+Create an EC2 instance with Ubuntu server.
+Add firewall rules to allow TCP port 22 (SSH) and port 8000 (FastAPI default).
+Allow external access to ports 22, 8000, and your database port.
+Clone the project to the server using Git.
+Create a start.sh file that installs pip requirements and runs the application server.
+Create a virtual environment.
+Install Gunicorn.
+Create a service file and link it to start.sh.
+Use systemctl to enable the .service file.
+Use systemctl to start the service.
+Install Nginx (sudo apt install nginx).
+Create an Nginx config file to set up reverse proxy:
+Forward requests from port 88 (or 80/443 for production)
+Point to your FastAPI app running on port 8000
+Add your server’s IP address or domain name
+
+43.What is a Context Manager?
+A context manager in FastAPI is a way to run some code before your app starts and after your app stops.
+Using @asynccontextmanager decorator in function 
+It’s often used for things like:
+Connecting to a database
+Loading initial (seed) data
+Cleaning up resources when the app shuts down
+
+44. RestAPI?
+send http request from client to server and then get a response back.
+Client → Http Request → Server → Response → Client
+
+45. What is a Router in FastAPI?
+A router in FastAPI is a way to organize your API endpoints.
+Instead of writing all routes in one file, you can split them into different routers (like user routes, product routes, etc.) and then include them in your main app.
+
+46. Pydantic:
+It is python library used for data validation and data parsing.
+It defines what data the api expects (request, body, query params)
+Validate the incoming data automictically
+Convert data into correct datatype(like int, str)
+Return data in clean and structure format.
+
+47. Uvicorn:
+It is light weight web server used to ASGI application like fastapi framework.
+i) synchrous request (normal http request)
+ii) Asynchrous request(websocket, background task)
+WSGI limitation cannot handle webscokets, only support synchrous http request
+ASGI solves can handle aynsc + sync support websocket
+Webscocket are used when data must update continuously or instanly. communication protocal communicate b/w client and server single long live connection.
+Both sides connection are open.
+Used for live cricket score, online gaming, food delievery app(swiggy)
+
+48:Webhooks:
+It is a way of one application to sent real time data or notification to another application when specific event occurs.
+Reatime example UPI payment.
+
+49.Webscrapping
+It is process of extracting data from website by fetching and parsing the HTML content.
+Used for price monitoring, market analysis.
+Tools: Beautiful soap, scrapy, Requests, Selenium.
+
+50. Solve the factorial:
+n = input("Enter the number: ")
+fact = 1
+for i in range(1, int(n)+1):
+    fact *= i    
+print(fact)
+
+51. #Recursion is when a function calls itself to solve a smaller piece of the same problem.
+data = [1, 2, [3], [4, [5, 6]]]
+
+def flatten_list(nested):
+    result = []
+    for i in nested:
+        if isinstance(i, list):
+            result.extend(flatten_list(i))
+        else:
+            result.append(i)
+    return result
+print(flatten_list(data))
+
+52.
+words = ["to", "python", "go", "word"]
+o/p:{2: ['to', 'go'], 6: ['python'], 4: ['word']}
+words_count = {}
+
+for word in words:
+    words_count[word] = len(word)
+
+res = {}
+
+for keys, values in words_count.items():
+    if values in res:
+        res[values].append(keys)
+    else:
+        res[values] = [keys]
+
+print(res)
+
+
+
+
+
+
