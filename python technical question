@@ -547,8 +547,27 @@ for keys, values in words_count.items():
 
 print(res)
 
+53.
+PyTorch
+Definition: PyTorch is an open-source deep learning framework created by Meta (Facebook AI Research).
+Purpose: It helps developers and researchers build and train neural networks easily.
+Key point: Known for being flexible and “Pythonic,” making it popular in both research and industry.
+Usecases:
+Speech and audio processing
+Natural language processing (text classification, translation, chatbots)
+
+54.
+Natural Language Processing (NLP)
+Definition: NLP is a field of artificial intelligence that focuses on enabling computers to understand, interpret, 
+and generate human language (text or speech).
+Examples: Chatbots, translation apps, voice assistants, sentiment analysis.
+
+55.
+TensorFlow
+Definition: TensorFlow is an open-source machine learning framework developed by Google Brain.
+Purpose: It provides tools to build, train, and deploy machine learning and deep learning models across platforms (desktop, mobile, cloud).
+Key point: Widely used for tasks like image recognition, NLP, and predictive analytics.
 
 
-
-
-
+PyTorch and TensorFlow are frameworks (tools) for building AI models.
+NLP is a domain of AI focused on language, and it often uses frameworks like PyTorch or TensorFlow to build solutions.
