@@ -555,6 +555,8 @@ Key point: Known for being flexible and “Pythonic,” making it popular in bot
 Usecases:
 Speech and audio processing
 Natural language processing (text classification, translation, chatbots)
+A neural network is a type of machine learning model inspired by how the human brain works. 
+It’s made up of layers of connected “neurons” (mathematical functions) that process data and learn patterns.
 
 54.
 Natural Language Processing (NLP)
