@@ -117,6 +117,9 @@ In python GIL executes single threads at a time even on mutiple cpu core.
 As the result multithreading does not perform on cpu bound task due to GIL.
 So where threads spend amount of time waiting in i/o opertion, other threads are scheduled to executed
 
+Async is best for I/O task (API/DB calls)
+Thread help with background task or CPU-heavy task.
+
 12. Multiprocessing?
 Multiprocessing means running many processes at the same time, each on its own CPU core.
 Unlike multithreading, it avoids Python’s GIL, so it’s best for CPU-bound tasks like heavy calculations or data processing.
@@ -212,6 +215,11 @@ Create INDEX index_name on table_name(col);
 Drop INDEX index_name on table_name(col);
 2. Removing Unwanted Subqueries (Using Joins Instead)
 3. Using Lambda and Map Functions Instead of For Loops (Python)
+4. Redis caching server
+Redis acts as a high‑speed in‑memory cache that stores API responses, so repeated requests are served instantly without hitting the database.
+When get api is called, we store the response in a cache server like redis. next time when the same request comes, we return
+data from cache instead of calling the database again
+Advantage: Reduce db load, improves api performance
 
 24. oops(object oriented programming language)
 creating objects that contain both data and behaviour
@@ -362,7 +370,6 @@ Github --  cloud-based platform
 remote storage for git respositories
 ci/cd integration for automation using via github action runner
 code review and access control
-
 
 31. range function
 generates sequence of numbers. it creates a range object that represents sequence of numbers
@@ -550,6 +557,7 @@ print(res)
 53.
 PyTorch
 Definition: PyTorch is an open-source deep learning framework created by Meta (Facebook AI Research).
+Used in Machine learning pipelines and AI features.
 Purpose: It helps developers and researchers build and train neural networks easily.
 Key point: Known for being flexible and “Pythonic,” making it popular in both research and industry.
 Usecases:
@@ -557,6 +565,14 @@ Speech and audio processing
 Natural language processing (text classification, translation, chatbots)
 A neural network is a type of machine learning model inspired by how the human brain works. 
 It’s made up of layers of connected “neurons” (mathematical functions) that process data and learn patterns.
+
+Machine Learning
+Machine Learning is a branch of Artificial Intelligence that enables computer systems to learn patterns from datasets 
+and make predictions or decisions without programmed by humans.
+
+Deep Learning
+Deep Learning uses artificial neural networks with multiple hidden layers that can automatically learn complex patterns from 
+raw data like images, sound, and text. It’s used in applications such as image recognition, natural language processing, and speech recognition.
 
 54.
 Natural Language Processing (NLP)
@@ -573,3 +589,44 @@ Key point: Widely used for tasks like image recognition, NLP, and predictive ana
 
 PyTorch and TensorFlow are frameworks (tools) for building AI models.
 NLP is a domain of AI focused on language, and it often uses frameworks like PyTorch or TensorFlow to build solutions.
+
+56.
+How do you handle failure?
+Proper error handling, retries, timeouts and logging 
+
+57.
+How do you secure APIs?
+JWT authentication, input validation, role base access control and HTTPS
+
+58.
+Streamlit
+It is used to quickly build UI dashboards
+
+59.
+Matplotlib and Seaborn
+It is used for data visualization
+
+60. CORS stands for Cross‑Origin Resource Sharing.
+It’s a browser security mechanism that allows a web application running on 
+one origin (domain, protocol, or port) to request resources from another origin
+When the application is running, the backend communicates with the frontend. At that time, we were getting CORS errors.
+To fix this, we integrated CORS middleware into the app’s middleware settings.
+In the development environment, we used allow_origins="*" to permit all domains.
+In production, we restricted allow_origins to only the frontend URL and IP address.
+
+
+BRD - Business Requirements Document, focusing on why a project is needed and its high-level business goals.
+SRS - Software Requirements Specification, Provides functional/non-functional requirements (detailing how the system will work to meet those needs)
+
+Roles & Responsibilities (Interview Version)
+I lead backend development using Python FastAPI and PostgreSQL, focusing on database design and REST API implementation.
+
+I integrate third‑party tools like Redmine and GitLab via APIs, building a two‑way synchronization system to keep external tools and our main database aligned.
+
+I ensure security and compliance by implementing Azure AD Single Sign‑On, JWT authentication, and role‑based access control in line with ASPICE standards.
+
+I automate recurring tasks with APScheduler, such as syncing Redmine/GitLab data and handling checklist approvals.
+
+I actively participate in daily Scrum meetings, translating BRD/SRS requirements into technical solutions and collaborating with designers.
+
+I mentor junior developers, guiding them on best practices, code reviews, and aligning their work with project standards.
