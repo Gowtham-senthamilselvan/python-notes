@@ -615,6 +615,43 @@ In the development environment, we used allow_origins="*" to permit all domains.
 In production, we restricted allow_origins to only the frontend URL and IP address.
 
 
+A defaultdict is like a regular Python dict, but it automatically creates a default value for missing keys instead of throwing a KeyError.
+
+defaultdict(int) 0 counting
+defaultdict(list)[] grouping items
+defaultdict(set) set() unique grouping
+
+
+data = ["user1,200", "user2,400", "user1,200", "user2,200", "user3,201", "user3,404"]
+from collections import defaultdict
+
+grouped = defaultdict(int)
+
+for i in data:
+    user, status = i.split(",")
+    if status == "200":            
+        grouped[(user, status)] += 1
+        
+print(grouped.items())
+for (user, status), count in grouped.items():
+    print(f"{user} | status {status} | count: {count}")
+
+data = ["user1,200", "user2,400", "user1,200", "user2,200", "user3,201", "user3,404"]
+
+result = {}
+
+for i in data:
+    user, status = i.split(",")
+    if status == "200":
+        print(user, status)
+        result[user] = result.get(user,0) + 1
+        
+print("count of status code : 200", result)
+
+#result.get("user1", 0)  # "user1" exists → returns 1
+#result["user1"] = 1 + 1
+
+
 BRD - Business Requirements Document, focusing on why a project is needed and its high-level business goals.
 SRS - Software Requirements Specification, Provides functional/non-functional requirements (detailing how the system will work to meet those needs)
 
@@ -630,3 +667,48 @@ I automate recurring tasks with APScheduler, such as syncing Redmine/GitLab data
 I actively participate in daily Scrum meetings, translating BRD/SRS requirements into technical solutions and collaborating with designers.
 
 I mentor junior developers, guiding them on best practices, code reviews, and aligning their work with project standards.
+
+In the production environment,one API response is taking a minute and running slowly. 
+How you optimize the code. What are the steps do you follow?
+
+
+You are given a list of words. Write a program to group these words based on their length. 
+The output should be a dictionary where:
+
+words = ["to", "python", "go", "word"]
+
+Output: {2: ['to', 'go'], 6: ['python'], 4: ['word']}
+
+
+
+You are given a nested list of integers. Your task is to flatten the list so that all the elements appear in a single list without any nested structure.
+data = [1, 2, [3], [4, [5, 6]]]
+
+Output: [1,2, 3, 4, 5, 6]
+
+
+Given a list of integers, write a Python program to pair the first element with the last, the second with the second‑last, 
+and so on, until the middle of the list is reached. The program should return a list of tuples containing these pairs.
+
+data = [1,2,3,4,5,6]
+ 
+# o/p :[(1, 6), (2, 5), (3, 4)]
+
+res = []
+
+for i in range(len(data)//2):
+    res.append((data[i],data[-(i+1)]))
+print(res)
+
+
+data = [1,2,3,4,5,6]
+
+target = 7
+
+res = []
+
+for i in data:
+    if (target-i) in data and (i, target - i) not in res and (target - i, i) not in res:
+        res.append((i,(target-i)))
+
+print(res)
